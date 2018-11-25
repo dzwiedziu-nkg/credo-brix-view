@@ -60,7 +60,7 @@ class HitsChart extends React.PureComponent<HitsChartProps> {
               l: 0,
               r: 0,
               t: 24,
-              b: 10
+              b: 24
             },
             showlegend,
             legend: {
