@@ -1,0 +1,29 @@
+{
+  "name": "credo-brix-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.5.1",
+    "@material-ui/icons": "^3.0.1",
+    "axios": "^0.18.0",
+    "plotly.js": "^1.42.5",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-plotly.js": "^2.2.0",
+    "react-scripts-ts": "3.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.10",
+    "@types/react": "^16.7.7",
+    "@types/react-dom": "^16.0.10",
+    "@types/plotly.js": "^1.41.0",
+    "@types/react-plotly.js": "^2.2.2",
+    "typescript": "^3.1.6"
+  }
+}
