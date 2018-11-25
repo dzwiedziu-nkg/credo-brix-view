@@ -7,9 +7,9 @@ const styles = (theme:Theme) => ({
   root: {
     maxWidth: theme.spacing.unit * 110,
     margin: 'auto',
-    padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2}px`,
+    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing.unit * 6}px ${theme.spacing.unit * 2}px`,
+      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     },
   },
   version: {

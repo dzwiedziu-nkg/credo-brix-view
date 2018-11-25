@@ -4,9 +4,12 @@ import * as React from "react";
 import {Theme, withStyles, WithStyles} from "@material-ui/core";
 import HitsChart from "./HitsChart";
 import {HitsData} from "./Types";
+import {PlotDatum} from "plotly.js";
+import HitsImages from "./HitsImages";
 
 interface HitsViewState {
   hits: HitsData | null;
+  points: PlotDatum[];
 }
 
 const styles = (theme:Theme) => ({
@@ -14,7 +17,7 @@ const styles = (theme:Theme) => ({
 
 class HitsView extends React.Component<{}, HitsViewState> {
 
-  public state = {hits: null};
+  public state = {hits: null, points: []};
 
   public loadData() {
     axios
@@ -25,11 +28,14 @@ class HitsView extends React.Component<{}, HitsViewState> {
   }
 
   public render() {
-    const { hits } = this.state;
+    const { hits, points } = this.state;
 
     if (hits !== null) {
       return (
-        <HitsChart data={hits}/>
+        <>
+          <HitsChart data={hits} onHover={this.onHover}/>
+          <HitsImages points={points}/>
+        </>
       );
     } else {
       return (
@@ -40,6 +46,10 @@ class HitsView extends React.Component<{}, HitsViewState> {
 
   public componentDidMount(): void {
     this.loadData();
+  }
+
+  private onHover = (points: PlotDatum[]) => {
+    this.setState({points});
   }
 }
 

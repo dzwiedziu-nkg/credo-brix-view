@@ -1,48 +1,52 @@
 import * as React from 'react';
+import * as moment from 'moment';
 import Plot from 'react-plotly.js';
 
 import {Theme, withStyles, WithStyles} from "@material-ui/core";
+
+import HitsImages from "./HitsImages";
 import {HitsData} from "./Types";
+import {PlotDatum} from "plotly.js";
 
 const styles = (theme:Theme) => ({
   plot: {
-    width: '100%'
+    width: '100%',
+    height: 400
   }
 });
 
 interface HitsChartProps {
   data: HitsData;
+  showlegend?: boolean;
+  onHover: (points: PlotDatum[]) => void;
 }
 
-class HitsChart extends React.Component<HitsChartProps> {
+class HitsChart extends React.PureComponent<HitsChartProps> {
+  public state = {points: []};
+
+  private plot = React.createRef<Plot>();
+
   public render() {
-    const {classes:{plot}, data} = this.props as HitsChartProps & WithStyles<typeof styles>;
+    const {classes:{plot}, data, showlegend = true} = this.props as HitsChartProps & WithStyles<typeof styles>;
+    const { points } = this.state;
+
+    const today = moment().startOf('hour').add(-2,'hour');
+    const tomorrow = moment().startOf('hour').add(-1,'hour');
+
+    console.log(today, tomorrow);
 
     return (
       <Plot
+        ref={this.plot}
         className={plot}
-        data={data.plots /*[
-          {
-            x: data.x,
-            y: data.y,
-            type: 'scatter',
-            mode: 'markers',
-            name: 'te'
-            //marker: {color: 'red'}
-          },
-          {
-            x: data.x,
-            y: data.y,
-            type: 'scatter',
-            mode: 'markers',
-            //marker: {color: 'blue'}
-          }
-        ]*/}
+        data={data.plots}
         layout={
           {
             autosize: true,
+            dragmode: 'pan',
             xaxis: {
-                type: 'date'
+              type: 'date',
+              range: [today.unix() * 1000, tomorrow.unix() * 1000]
             },
             yaxis: {
               fixedrange: true,
@@ -50,17 +54,36 @@ class HitsChart extends React.Component<HitsChartProps> {
               ticks: 'outside',
               tick0: 0,
               dtick: 1,
-              tickvals: [1],
+              tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
               ticktext: ['Hit']
             },
-            //showlegend: false
+            margin: {
+              l: 0,
+              r: 0,
+              t: 24,
+              b: 10
+            },
+            showlegend,
+            legend: {
+              orientation: 'h'
+            }
           }
         }
-        config={ {responsive: true} }
+        config={{
+          responsive: true,
+          scrollZoom: true,
+          displayModeBar: true,
+          //modeBarButtonsToAdd: ['zoom2d', 'pan2d', 'zoomIn2d', 'zoomOut2d']
+        }}
         useResizeHandler={true}
+        onHover={this.onHover}
       />
     );
   }
+
+  private onHover = (event: Readonly<Plotly.PlotMouseEvent>) => {
+    this.props.onHover(event.points);
+  };
 }
 
 export default withStyles(styles)(HitsChart);
