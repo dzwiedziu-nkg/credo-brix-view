@@ -1,14 +1,15 @@
-import * as React from 'react';
 import * as moment from 'moment';
+import * as React from 'react';
+
+import {PlotDatum} from "plotly.js";
 import Plot from 'react-plotly.js';
 
-import {Theme, withStyles, WithStyles} from "@material-ui/core";
+import {withStyles, WithStyles} from "@material-ui/core";
 
-import HitsImages from "./HitsImages";
 import {HitsData} from "./Types";
-import {PlotDatum} from "plotly.js";
 
-const styles = (theme:Theme) => ({
+
+const styles = () => ({
   plot: {
     width: '100%',
     height: 400
@@ -30,10 +31,8 @@ class HitsChart extends React.PureComponent<HitsChartProps> {
     const {classes:{plot}, data, showlegend = true} = this.props as HitsChartProps & WithStyles<typeof styles>;
     const { points } = this.state;
 
-    const today = moment().startOf('hour').add(-2,'hour');
+    const today = moment().startOf('hour').add(-4,'hour');
     const tomorrow = moment().startOf('hour').add(-1,'hour');
-
-    console.log(today, tomorrow);
 
     return (
       <Plot
@@ -72,11 +71,11 @@ class HitsChart extends React.PureComponent<HitsChartProps> {
         config={{
           responsive: true,
           scrollZoom: true,
-          displayModeBar: true,
-          //modeBarButtonsToAdd: ['zoom2d', 'pan2d', 'zoomIn2d', 'zoomOut2d']
+          displayModeBar: true
         }}
         useResizeHandler={true}
         onHover={this.onHover}
+        onClick={this.onHover}
       />
     );
   }
