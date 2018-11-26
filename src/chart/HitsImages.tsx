@@ -6,7 +6,6 @@ import {PlotDatum} from "plotly.js";
 
 const styles = (theme:Theme) => ({
   root: {
-    width: '100%',
     margin: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.up('sm')]: {
       margin: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
