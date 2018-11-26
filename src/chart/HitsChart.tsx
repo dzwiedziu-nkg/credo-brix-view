@@ -31,8 +31,8 @@ class HitsChart extends React.PureComponent<HitsChartProps> {
     const {classes:{plot}, data, showlegend = true} = this.props as HitsChartProps & WithStyles<typeof styles>;
     const { points } = this.state;
 
-    const today = moment().startOf('hour').add(-4,'hour');
-    const tomorrow = moment().startOf('hour').add(-1,'hour');
+    const today = moment().startOf('hour').add(-25,'hour');
+    const tomorrow = moment().startOf('hour').add(-22,'hour');
 
     return (
       <Plot
