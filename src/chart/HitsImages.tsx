@@ -1,7 +1,6 @@
 import {Theme, WithStyles, withStyles} from '@material-ui/core/styles';
 import * as React from 'react';
 
-import {Card, CardActionArea, CardMedia} from "@material-ui/core";
 import {PlotDatum} from "plotly.js";
 
 const styles = (theme:Theme) => ({
@@ -42,15 +41,3 @@ const HitsImages = ({classes:{root, card, media}, points}:WithStyles<typeof styl
 };
 
 export default withStyles(styles)(HitsImages);
-/*
-<Card className={card} key={i}>
-            { console.log(o)}
-            <CardActionArea>
-              <CardMedia
-                className={media}
-                // @ts-ignore
-                image={`png/${o.data.hit[o.pointIndex]}.png`}
-              />
-            </CardActionArea>
-          </Card>
- */

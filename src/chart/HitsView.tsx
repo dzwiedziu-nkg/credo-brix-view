@@ -6,6 +6,7 @@ import HitsChart from "./HitsChart";
 import {HitsData} from "./Types";
 import {PlotDatum} from "plotly.js";
 import HitsImages from "./HitsImages";
+import Export from "../export/Export";
 
 interface HitsViewState {
   hits: HitsData | null;
@@ -35,6 +36,7 @@ class HitsView extends React.Component<{}, HitsViewState> {
         <>
           <HitsChart data={hits} onHover={this.onHover}/>
           <HitsImages points={points}/>
+          <Export data={hits}/>
         </>
       );
     } else {
