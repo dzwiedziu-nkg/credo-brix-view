@@ -63,18 +63,18 @@ class Export extends React.PureComponent<ExportProps, ExportState> {
   private onDownload = () => {
     const { data } = this.props;
     const { checked } = this.state;
-    const timestamps = [];
+    const timestamps:number[] = [];
     for (let i = 1; i < data.plots.length; i++) {
       if (checked[i]) {
         // @ts-ignore
-        timestamps.push(...data.plots[i].x);
+        data.plots[i].x.map((o, i) => timestamps.push(Math.round(o / 1000)));
       }
     }
     timestamps.sort();
     const content = timestamps.join('\r\n');
 
     const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-    FileSaver.saveAs(blob, "timestamps_0.txt")
+    FileSaver.saveAs(blob, "timestamp_0.txt")
   };
 
   private onSelect = (id:number, value:boolean) => {

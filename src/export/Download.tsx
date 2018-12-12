@@ -34,10 +34,13 @@ class Download extends React.PureComponent<DownloadProps> {
 
   private onDownload = () => {
     const { data, id } = this.props;
-    const content = data.x.join('\r\n');
+    const timestamps:number[] = [];
+    // @ts-ignore
+    data.x.map((o, i) => timestamps.push(Math.round(o / 1000)));
+    const content = timestamps.join('\r\n');
 
     const blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-    FileSaver.saveAs(blob, `timestamps_${id}.txt`)
+    FileSaver.saveAs(blob, `timestamp_${id}.txt`)
   }
 }
 
